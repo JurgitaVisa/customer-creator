@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryCustomerRepository implements CustomerRepository {
-    private Map<String, Customer> customersInDB = new HashMap<>();
+    private Map<Long, Customer> customersInDB = new HashMap<>();
 
     @Override
     public Customer createCustomer(Customer customer) {
@@ -19,12 +19,13 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public void addListOfCustomers(List<Customer> customers) {
+    public List<Customer> addListOfCustomers(List<Customer> customers) {
         customers.forEach(customer -> customersInDB.putIfAbsent(customer.getID(), customer));
+        return customers;
     }
 
     @Override
-    public Customer getOne(String ID) {
+    public Customer getOne(Long ID) {
         return customersInDB.get(ID);
     }
 
@@ -40,7 +41,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public void deleteCustomer(String ID) {
+    public void deleteCustomer(Long ID) {
         customersInDB.remove(ID);
     }
 

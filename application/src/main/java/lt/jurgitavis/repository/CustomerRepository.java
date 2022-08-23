@@ -9,9 +9,9 @@ import java.util.List;
 public interface CustomerRepository {
 
     Customer createCustomer(Customer customer);
-    void addListOfCustomers(List<Customer> customers);
-    Customer getOne(String ID);
+    List<Customer> addListOfCustomers(List<Customer> customers);
+    Customer getOne(Long ID);
     List<Customer> findAll();
     Customer updateCustomer(Customer customer);
-    void deleteCustomer(String ID);
+    void deleteCustomer(Long ID);
 }

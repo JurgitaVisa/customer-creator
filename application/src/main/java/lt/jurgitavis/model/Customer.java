@@ -3,21 +3,22 @@ package lt.jurgitavis.model;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
-@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Customer {
-    String ID = UUID.randomUUID().toString();
+    private static final AtomicLong nextId = new AtomicLong(1);
 
+    private Long ID = nextId.getAndIncrement();
     @NonNull
     private String name;
     @NonNull
     private String surname;
     @NonNull
-    private LocalDate birthDate;
+    private LocalDate birthdate;
     @NonNull
     private String phoneNumber;
     @NonNull
