@@ -1,0 +1,7 @@
+.ng-invalid:not(form).ng-touched {
+    background-color: #F3B8B8;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}

@@ -1,0 +1,18 @@
+<ul ngbNav #nav="ngbNav" class="nav-tabs">
+  <!-- Table -->
+  <li ngbNavItem>
+    <a ngbNavLink>Customer's table</a>
+    <ng-template ngbNavContent>
+      <app-table></app-table>
+    </ng-template>
+  </li>
+  <!-- Form -->
+  <li ngbNavItem>
+    <a ngbNavLink>Add customer</a>
+    <ng-template ngbNavContent>
+      <app-customer-form></app-customer-form>
+    </ng-template>
+  </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

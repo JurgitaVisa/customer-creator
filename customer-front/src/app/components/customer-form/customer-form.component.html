@@ -1,0 +1,110 @@
+<!-- Pre-fill form -->
+
+<div class="py-3">
+    <div class="text-muted">Would you like to pre-fill the form?</div>
+    <button class="btn btn-primary shadow-sm mt-2" (click)="prefillForm()">Yes</button>
+</div>
+
+<form class="text-muted" (ngSubmit)="handleSubmit() ; customerForm.reset()" #customerForm="ngForm">
+
+    <!-- Name -->
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input required minlength="2" maxlength="70"
+            pattern="^(?![ ])(?!.*(?:\d|[ ]{2}|[!$%^&*()_+|~=`\{\}\[\]:?,\/]))(?:(?:e|da|do|das|dos|de|d'|la|las|el|los|l'|al|of|the|el-|al-|di|van|der|op|den|ter|te|ten|ben|ibn)\s*?|(?:[A-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'][^\s]*\s*?)(?!.*[ ]$))+$"
+            class="form-control" type="text" name="name" [(ngModel)]="customerName" id="name" placeholder="Justinas"
+            #name="ngModel" />
+        <div [hidden]="name.valid || name.pristine" class="text-danger">
+            <div *ngIf="name.errors?.['required']">
+                Name is required
+            </div>
+            <div *ngIf="name.errors?.['minlength']||name.errors?.['maxlength']">
+                Name must be between 2 and 70 symbols long
+            </div>
+            <div *ngIf="name.errors?.['pattern']">
+                Please provide a well formed name eg. Andrew
+            </div>
+        </div>
+    </div>
+
+    <!-- Surname -->
+
+    <div class="form-group">
+        <label for="surname">Surname</label>
+        <input required minlength="2" maxlength="70"
+            pattern="^(?![ ])(?!.*(?:\d|[ ]{2}|[!$%^&*()_+|~=`\{\}\[\]:?,\/]))(?:(?:e|da|do|das|dos|de|d'|la|las|el|los|l'|al|of|the|el-|al-|di|van|der|op|den|ter|te|ten|ben|ibn)\s*?|(?:[A-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'][^\s]*\s*?)(?!.*[ ]$))+$"
+            class="form-control" type="text" name="surname" [(ngModel)]="customerSurname" id="surname"
+            placeholder="Petrauskas" #surname="ngModel" />
+    </div>
+    <div [hidden]="surname.valid || surname.pristine" class="text-danger">
+        <div *ngIf="surname.errors?.['required']">
+            Surname is required
+        </div>
+        <div *ngIf="surname.errors?.['minlength']||surname.errors?.['maxlength']">
+            Surname must be between 2 and 70 symbols long
+        </div>
+        <div *ngIf="surname.errors?.['pattern']">
+            Please provide a well formed surname eg. Peters
+        </div>
+    </div>
+
+    <!-- Birthdate -->
+
+    <div class="form-group">
+        <label for="birthdate">Date of birth</label>
+        <div class="input-group">
+            <input required [minDate]="minDate" [maxDate]="maxDate" class="form-control" name="birthdate"
+                [(ngModel)]="customerBirthdate" id="birthdate" ngbDatepicker #d="ngbDatepicker" placeholder="yyyy-mm-dd"
+                #birthdate="ngModel" />
+            <button class="btn btn-outline-secondary calendar shadow-sm" (click)="d.toggle()" type="button">
+                <fa-icon [icon]="faCalendar"></fa-icon>
+            </button>
+        </div>
+        <div [hidden]="birthdate.valid || birthdate.pristine" class="text-danger">
+            <div *ngIf="birthdate.errors?.['required']">
+                Date of birth is required
+            </div>
+            <div *ngIf="birthdate.errors">
+                Please select a date before today and not more than 120 years ago
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone number -->
+
+    <div class="form-group">
+        <label for="phoneNumber">Phone number</label>
+        <input required pattern="[+]{1}[0-9]{11,20}" class="form-control" type="text" name="phoneNumber"
+            [(ngModel)]="customerPhoneNumber" id="phoneNumber" placeholder="+37012345678" #phoneNumber="ngModel" />
+        <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="text-danger">
+            <div *ngIf="phoneNumber.errors?.['required']">
+                Phone number is required
+            </div>
+            <div *ngIf="phoneNumber.errors?.['pattern']">
+                Please provide a valid phone number eg. +3712513265421
+            </div>
+        </div>
+    </div>
+
+    <!-- Email -->
+
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" class="form-control" type="email" name="email"
+            [(ngModel)]="customerEmail" id="email" placeholder="mail@mail.lt" #email="ngModel" />
+        <div [hidden]="email.valid || email.pristine" class="text-danger">
+            <div *ngIf="email.errors?.['required']">
+                E-mail is required
+            </div>
+            <div *ngIf="email.errors?.['pattern']">
+                Please provide a valid e-mail
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-block btn-success shadow-sm my-3" [disabled]="!customerForm.form.valid">Submit</button>
+</form>
+
+<div class="alert alert-success" *ngIf="successfullyAdded">Successfully added!</div>
+<div class="alert alert-danger" *ngFor="let error of errors">{{error}}</div>      

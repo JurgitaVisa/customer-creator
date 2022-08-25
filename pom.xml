@@ -52,6 +52,7 @@
     <modules>
         <module>person-generator</module>
         <module>application</module>
+        <module>customer-front</module>
     </modules>
 
 </project>

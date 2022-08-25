@@ -1,0 +1,40 @@
+<!-- Search the table -->
+
+<div class="form-group mb-3 row">
+    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Find customer:</label>
+    <div class="col-xs-3 col-sm-auto">
+        <input id="table-filtering-search" class="form-control" type="text" name="searchValue" [(ngModel)]="searchValue">
+    </div>
+</div>
+
+<!-- Customer table -->
+
+<table class="table table-striped text-muted">
+    <thead>
+        <tr>
+            <th *ngFor="let column of columns" scope="col">
+                {{column.label}}
+            </th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers | searchfilter: searchValue | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ">
+            <td *ngFor="let column of columns">{{column.content(customer)}}</td>
+            <th scope="col">
+                <app-actions (onDeleteCustomer)="handleDeleteCustomer(customer)"
+                    (onShowCustomerDetails)="handleShowCustomerDetails(customer)"></app-actions>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Pagination -->
+
+<div class="d-flex justify-content-between py-3">
+    <ngb-pagination [collectionSize]="customers.length" [(page)]="page" [maxSize]="pageSize" [rotate]="true"
+        [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+    <select class="form-select mb-3" style="width: auto" (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of pageSizes">{{size}}</option>
+    </select>
+</div>

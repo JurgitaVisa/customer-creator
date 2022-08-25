@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{customer.name}} {{customer.surname}}</h4>
+</div>
+<div class="modal-body">
+    <div class="row" *ngFor="let field of objectFields(customer)">
+        <div class="col-sm-4">
+            <span>{{field[0]}}</span>
+        </div>
+        <div class="col-sm-8">
+            <span>{{field[1]}}</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary shadow-sm" (click)="closeModal()">Close</button>
+</div>
