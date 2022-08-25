@@ -12,8 +12,13 @@ Angular front-end application:
 1. customer-front
 
 ### Screenshots
-![ScreenShot](images/main.JPG)
-![ScreenShot](images/form.JPG)
+<p align="center">
+  <img src="images/main.jpg" alt="Main" />
+</p>
+
+<p align="center">
+  <img src="images/form.jpg" alt="Form" />
+</p>
 
 #### Technologies used:
 - Spring Boot 2.7.1,
